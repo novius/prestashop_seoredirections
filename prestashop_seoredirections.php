@@ -25,7 +25,7 @@ class Prestashop_SEORedirections extends Module
         $this->version = '0.1.0';
         $this->author = 'Novius';
         $this->need_instance = 0;
-        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => '1.6'];
+        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
         $this->bootstrap = true;
 
         parent::__construct();
@@ -298,6 +298,9 @@ class Prestashop_SEORedirections extends Module
         $helper->title = $this->displayName;
         $helper->submit_action = 'import_redirection';
         $helper->show_toolbar = true;
+        $helper->fields_value = [
+            'csv_skip_first_line' => 0,
+        ];
 
         return $helper->generateForm($this->fields_form);
     }
@@ -422,6 +425,7 @@ class Prestashop_SEORedirections extends Module
             $helper->fields_value['old_url'] = Tools::getValue('old_url', '');
             $helper->fields_value['new_url'] = Tools::getValue('new_url', '');
             $helper->fields_value['redirection_type'] = Tools::getValue('redirection_type', '');
+            $helper->fields_value['id_redirection'] = '';
         }
 
         return $helper->generateForm($this->fields_form);
@@ -455,7 +459,7 @@ class Prestashop_SEORedirections extends Module
                     'label' => $this->l('Redirection type'),
                     'name' => 'redirection_type',
                     'options' => [
-                        'query' => ['' => ''] + RedirectionModel::getRedirectionsTypes(),
+                        'query' => RedirectionModel::getRedirectionsTypes(),
                         'id' => 'type',
                         'name' => 'name',
                     ],

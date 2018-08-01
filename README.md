@@ -8,7 +8,7 @@ You can also import a .csv file for your redirections.
 
 ## Requirements
 
-* This module is compatible with PrestaShop **1.6**
+* This module is compatible with PrestaShop **1.6** AND **1.7**
 * This module requires PHP >= 5.6
 
 ## Installation

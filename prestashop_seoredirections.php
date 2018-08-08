@@ -22,7 +22,7 @@ class Prestashop_SEORedirections extends Module
     {
         $this->name = 'prestashop_seoredirections';
         $this->tab = 'seo';
-        $this->version = '0.1.0';
+        $this->version = '0.1.2';
         $this->author = 'Novius';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
@@ -516,8 +516,8 @@ class Prestashop_SEORedirections extends Module
                 $parsed_url = parse_url($old_url);
                 // Do a new search only if there are GET parameters in previous OLD URL search
                 if (! empty($parsed_url['query'])) {
-                    $old_url = $base_uri.$parsed_url['path'];
-                    $result = RedirectionModel::findRedirectionByOldUrl($old_url, true);
+                    $old_url = $base_uri.$parsed_url['path']; // Search occurrence without query parameter
+                    $result = RedirectionModel::findRedirectionByOldUrl($old_url);
                 }
             }
 
